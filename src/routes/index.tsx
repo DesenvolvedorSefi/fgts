@@ -1,5 +1,6 @@
-import { $, component$, useStore } from "@builder.io/qwik";
+import { $, component$, useStore, useTask$ } from "@builder.io/qwik";
 import { type DocumentHead } from "@builder.io/qwik-city";
+import dayjs from "dayjs";
 import Duvidas from "~/components/duvidas";
 import Modalidades from "~/components/modalidades";
 import Panel from "~/components/panel";
@@ -8,19 +9,34 @@ import Sobre from "~/components/sobre";
 import Volte from "~/components/volte";
 
 export default component$(() => {
-	const store = useStore({
-		valor: 1200,
-		parcela: 18,
-		dono: false,
+	const store = useStore<{
+		saldo: string;
+		aniversario: string;
+		resgate?: string;
+	}>({
+		saldo: "",
+		aniversario: "",
+		resgate: undefined,
 	});
 
 	const solicitar = $(async () => {
-		if (store.dono) {
-			document.querySelector("form")?.submit();
-		} else {
-			alert(
-				"Você precisa confirmar que é o titular da conta de energia."
-			);
+		console.log("NADA");
+	});
+
+	useTask$(({ track }) => {
+		const Store = track(store);
+		if (Store.aniversario !== "" && Store.saldo !== "") {
+			const aniversario = dayjs(store.aniversario);
+			const hoje = dayjs();
+			const diferenca = aniversario.diff(hoje, "day"); // diferença das datas em dias
+			const taxa = 0.99 / 100;
+			let saldo = ((Number(Store.saldo) * taxa) / 30) * diferenca;
+			saldo = Number(Store.saldo) - saldo;
+			const REAL = Intl.NumberFormat("pt-BR", {
+				style: "currency",
+				currency: "BRL",
+			});
+			store.resgate = REAL.format(saldo);
 		}
 	});
 
@@ -33,18 +49,22 @@ export default component$(() => {
 							<h5 class="uppercase font-bold tracking-wider text-sefi-2">
 								empréstimo fgts
 							</h5>
-							<h1 class="text-[34px] sm:text-5xl lg:text-6xl leading-none font-extrabold text-white tracking-tighter">
+							<h1 class="text-3xl sm:text-5xl lg:text-6xl leading-none font-extrabold text-white tracking-tighter">
 								Receba o que{" "}
 								<span class="text-yellow">já é seu</span>.{" "}
 								<br />
-								Até 10 parcelas.
+								Antecipe até 10 parcelas.
 								<br />
 								100% digital e{" "}
 								<span class="text-yellow">seguro</span>.
 							</h1>
+							<div class="text-white my-8 uppercase font-bold tracking-wider text-sm">
+								Sem consulta ao CPF <br />
+								Sem parcelas mensais
+							</div>
 							<div class="mt-4">
 								<a class="button button-large" href="/dados">
-									Solicite agora
+									Antecipe agora
 								</a>
 							</div>
 						</div>
@@ -78,6 +98,9 @@ export default component$(() => {
 								name="quanto"
 								class="input-field input"
 								placeholder="8.000,00"
+								onChange$={(event) => {
+									store.saldo = event.target.value;
+								}}
 							/>
 						</div>
 						<div>
@@ -89,6 +112,9 @@ export default component$(() => {
 								id="aniversario"
 								name="aniversario"
 								class="input-field input"
+								onChange$={(event) => {
+									store.aniversario = event.target.value;
+								}}
 							/>
 						</div>
 					</div>
@@ -97,7 +123,7 @@ export default component$(() => {
 						<div>
 							<div>Você pode antecipar até</div>
 							<div class="text-5xl text-sefi-4 font-black tracking-tighter">
-								R$ 1400
+								{store.resgate ?? "R$ 0,00"}
 							</div>
 						</div>
 
@@ -115,12 +141,12 @@ export default component$(() => {
 								<form method="post" action="/dados/">
 									<input
 										type="hidden"
-										value={store.valor}
+										value={store.saldo}
 										name="valor"
 									/>
 									<input
 										type="hidden"
-										value={store.parcela}
+										value={store.aniversario}
 										name="parcelas"
 									/>
 								</form>
@@ -128,7 +154,7 @@ export default component$(() => {
 									class="button button-large -mb-4 md:mb-0"
 									onClick$={solicitar}
 								>
-									Solicitar Empréstimo
+									Antecipe agora
 								</button>
 							</div>
 						</div>
@@ -156,12 +182,12 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-	title: "Empréstimo na conta de Luz - Rápido e Fácil - SEFI Crédito",
+	title: "Empréstimo pelo Saque-Aniversário do FGTS - Rápido e Fácil na SEFI Crédito",
 	meta: [
 		{
 			name: "description",
 			content:
-				"Faça seu empréstimo na Conta de luz de forma rápida e sem burocracia.",
+				"Faça seu empréstimo com garantia do saque-aniversário do seu FGTS de foprma rápida e fácil pela SEFI.",
 		},
 	],
 };
