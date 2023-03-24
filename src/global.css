@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	@apply antialiased text-neutral-5;
+}
+
+.animate-bg {
+	animation: animate infinite alternate 0.2s;
+	background-size: 400%;
+	background-position: top left;
+	/* transition: background-position 1s; */
+}
+.animate-bg:hover {
+	background-position: bottom right;
+}
+
+@keyframes animate {
+	0% {
+		background-position: left;
+	}
+
+	100% {
+		background-position: right;
+	}
+}
+
+.buttons {
+	@apply flex gap-2 justify-between flex-wrap;
+}
+
+.button-label {
+	@apply flex-1;
+}
+.buttons label {
+	@apply p-3 md:p-4 block bg-neutral-2 font-bold md:text-xl text-neutral-5 w-full text-center rounded-lg cursor-pointer hover:bg-neutral-2 transition;
+}
+
+.button-label input {
+	@apply hidden;
+}
+
+.buttons input:checked + label {
+	@apply bg-sefi text-white;
+}
+
+.checkbox {
+	@apply w-5 h-5 rounded-full border border-neutral-3;
+}
+
+#dono:checked + .checkbox:after {
+	content: ">";
+	@apply absolute w-2 h-2 top-1 rounded bg-green;
+}
+
+.form {
+	@apply grid grid-cols-2 gap-4 md:grid-cols-3;
+}
+
+.input {
+	@apply mb-2 block;
+}
+.input-label {
+	@apply block font-semibold mb-2 overflow-hidden whitespace-nowrap text-ellipsis;
+}
+.input-field {
+	@apply px-4 py-2 text-lg bg-neutral-2 rounded-lg w-full outline-none focus:ring ring-sefi ring-offset-2;
+}
+
+.button {
+	@apply px-6 py-3 rounded-lg inline-flex font-bold bg-yellow text-sefi-4 hover:bg-green transition hover:text-white text-center leading-none;
+}
+
+.button-large {
+	@apply px-8 py-5 rounded-xl tracking-tight text-2xl;
+}
