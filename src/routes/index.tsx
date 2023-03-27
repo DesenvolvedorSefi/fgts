@@ -29,9 +29,10 @@ export default component$(() => {
 			const aniversario = dayjs(store.aniversario);
 			const hoje = dayjs();
 			const diferenca = aniversario.diff(hoje, "day"); // diferença das datas em dias
-			const taxa = 0.99 / 100;
+			const taxa = 0.39 / 100;
 			let saldo = ((Number(Store.saldo) * taxa) / 30) * diferenca;
 			saldo = Number(Store.saldo) - saldo;
+
 			const REAL = Intl.NumberFormat("pt-BR", {
 				style: "currency",
 				currency: "BRL",
@@ -43,8 +44,8 @@ export default component$(() => {
 	return (
 		<>
 			<div class="max-w-5xl mx-auto px-4 md:px-8">
-				<div class="hero">
-					<div class="flex flex-col md:justify-between relative text-center">
+				<div>
+					<div class="flex flex-col md:flex-row relative text-center md:text-left">
 						<div class="py-8 sm:pt-0 md:py-16 z-10">
 							<h5 class="uppercase font-bold tracking-wider text-sefi-2">
 								empréstimo fgts
@@ -68,11 +69,11 @@ export default component$(() => {
 								</a>
 							</div>
 						</div>
-						<div class="w-52 md:w-72 text-center mx-auto">
+						<div class="w-52 md:w-auto text-center mx-auto md:absolute bottom-0 right-0 h-full">
 							<img
-								src="./hero.png"
+								src="./hero.webp"
 								alt="Na SEFI é muito rápido e fácil conseguir o seu empréstimo."
-								class="w-auto mx-auto"
+								class="w-auto mx-auto h-full"
 							/>
 						</div>
 					</div>
@@ -87,8 +88,8 @@ export default component$(() => {
 
 					<hr class="my-8 border-t-neutral-2" />
 					{/* Parcelas */}
-					<div class="flex flex-col gap-4">
-						<div>
+					<div class="flex flex-col md:flex-row gap-4">
+						<div class="md:w-1/3">
 							<label for="quanto" class="input-label">
 								Qual é o seu saldo no FGTS?
 							</label>
@@ -103,7 +104,7 @@ export default component$(() => {
 								}}
 							/>
 						</div>
-						<div>
+						<div class="md:w-1/3">
 							<label for="aniversario" class="input-label">
 								Qual a data do seu aniversário
 							</label>
@@ -117,26 +118,25 @@ export default component$(() => {
 								}}
 							/>
 						</div>
-					</div>
-					<hr class="my-8 w-full border-t-neutral-2" />
-					<div class="flex flex-col gap-8 flex-wrap lg:flex-nowrap sm:flex-row justify-center text-center">
-						<div>
+						<div class="md:w-1/3">
 							<div>Você pode antecipar até</div>
 							<div class="text-5xl text-sefi-4 font-black tracking-tighter">
 								{store.resgate ?? "R$ 0,00"}
 							</div>
 						</div>
-
-						<div class="mx-auto max-w-xs lg:w-1/4">
+					</div>
+					<hr class="my-8 w-full border-t-neutral-2" />
+					<div class="flex flex-col gap-8 mt-8 sm:flex-row justify-center text-center">
+						<div class="mx-auto sm:1/2">
 							<div class="font-bold text-red text-xl">
 								ATENÇÃO
 							</div>
 							<div class="leading-tight">
-								A SEFI não solicita nenhum pagamento antecipado
-								para fazer o seu empréstimo.
+								A SEFI não solicita nenhum pagamento <br />{" "}
+								antecipado para fazer o seu empréstimo.
 							</div>
 						</div>
-						<div class="lg:w-1/2">
+						<div class="sm:w-1/2">
 							<div>
 								<form method="post" action="/dados/">
 									<input

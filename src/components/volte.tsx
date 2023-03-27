@@ -10,14 +10,17 @@ export default component$(() => {
 				Vamos voltar a negociar o seu empréstimo?
 			</div>
 			<div class="mt-4 text-center">
-				<a class="button shadow-lg shadow-sefi-4/50" href="#emprestimo">
+				<a
+					class="button button-large shadow-lg shadow-sefi-5/50"
+					href="#emprestimo"
+				>
 					Quero meu empréstimo
 				</a>
 			</div>
 			<div class="mt-4 text-center">
 				<a
 					href={context.whatsapp}
-					class="text-sefi-5 uppercase text-sm font-bold"
+					class="text-sefi-2 uppercase text-sm font-bold"
 					target="_blank"
 				>
 					Prefiro falar com uma consultora.

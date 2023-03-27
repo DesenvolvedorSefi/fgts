@@ -37,27 +37,25 @@ export default component$(() => {
 			icon: (
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					width="24"
-					height="24"
+					class="w-12 h-12 mx-auto"
 					viewBox="0 0 24 24"
 					fill="none"
 					stroke="currentColor"
 					stroke-width="2"
 					stroke-linecap="round"
 					stroke-linejoin="round"
-					class="w-12 h-12 mx-auto"
 				>
-					<path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2h0V5z"></path>
-					<path d="M2 9v1c0 1.1.9 2 2 2h1"></path>
-					<path d="M16 11h0"></path>
+					<line x1="9" y1="18" x2="15" y2="18"></line>
+					<line x1="10" y1="22" x2="14" y2="22"></line>
+					<path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path>
 				</svg>
 			),
-			title: "Empréstimo pelo",
-			subtitle: "seu FGTS",
+			title: "Empréstimo com déb. na",
+			subtitle: "Conta de Luz",
 			description:
-				"Liberte seu dinheiro parado no FGTS e realize seu sonho.",
+				"A forma mais fácil de conseguir um empréstimo. Ideal para negativados.",
 			link: context.whatsapp.concat(
-				"&text=Quero saber sobre o Empréstimo pelo FGTS."
+				"&text=Quero saber sobre o Empréstimo pela Conta de Luz."
 			),
 		},
 		{
