@@ -2,6 +2,7 @@ import { $, component$, useStore, useTask$ } from "@builder.io/qwik";
 import { type DocumentHead } from "@builder.io/qwik-city";
 import dayjs from "dayjs";
 import Duvidas from "~/components/duvidas";
+import FAQ from "~/components/FAQ";
 import Modalidades from "~/components/modalidades";
 import Panel from "~/components/panel";
 import Separator from "~/components/separator";
@@ -166,9 +167,9 @@ export default component$(() => {
 
 			{/* <Separator className="h-[1px] via-sefi-4" /> */}
 
-			<div class="bg-sefi-5">
-				<Duvidas />
-			</div>
+			<FAQ />
+
+			<Duvidas />
 
 			{/* <Separator className="h-[1px] via-sefi-4" /> */}
 

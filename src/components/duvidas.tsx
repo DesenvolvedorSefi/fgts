@@ -4,7 +4,7 @@ import { AppContext } from "~/root";
 export default component$(() => {
 	const context = useContext(AppContext);
 	return (
-		<div class="mx-auto py-8 md:pb-20 md:pt-16">
+		<div class="mx-auto py-8 md:pb-20 md:pt-16 bg-sefi-5 max-w-2xl rounded-2xl">
 			<div class="font-extrabold tracking-tighter text-5xl text-white max-w-2xl mx-auto mb-4 text-center px-8">
 				Ainda está em dúvida sobre fazer o seu empréstimo?
 			</div>
