@@ -21,7 +21,16 @@ export default component$(() => {
 	});
 
 	const solicitar = $(async () => {
-		console.log("NADA");
+		if (store.saldo === "") {
+			alert("Coloque o seu saldo FGTS para iniciar a solicitação.");
+			return false;
+		}
+		if (store.aniversario === "") {
+			alert("Coloque a data de aniversário do seu FGTS.");
+			return false;
+		}
+
+		document.querySelector("form")?.submit();
 	});
 
 	useTask$(({ track }) => {
@@ -143,12 +152,12 @@ export default component$(() => {
 									<input
 										type="hidden"
 										value={store.saldo}
-										name="valor"
+										name="saldo"
 									/>
 									<input
 										type="hidden"
 										value={store.aniversario}
-										name="parcelas"
+										name="aniversario"
 									/>
 								</form>
 								<button

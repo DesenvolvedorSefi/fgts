@@ -8,11 +8,12 @@ import { AppContext } from "~/root";
 export const useData = routeLoader$(async ({ request, redirect }) => {
 	try {
 		const fd = await request.formData();
-		const valor = fd.get("valor");
-		const parcelas = fd.get("parcelas");
+		const saldo = fd.get("saldo") as string;
+		const aniversario = fd.get("aniversario") as string;
+
 		return {
-			valor,
-			parcelas,
+			saldo,
+			aniversario,
 		};
 	} catch (e) {
 		redirect(303, "/");
@@ -27,8 +28,8 @@ type Dados = {
 	cep?: string;
 	email?: string;
 	telefone?: string;
-	valor?: string;
-	parcelas?: string;
+	saldo?: string;
+	aniversario?: string;
 };
 
 export default component$(() => {
@@ -42,8 +43,8 @@ export default component$(() => {
 	// 	cep: "62011000",
 	// 	email: "and3rsonsousa@outlook.com",
 	// 	telefone: "88981082050",
-	// 	valor: data.valor as string,
-	// 	parcelas: data.parcelas as string,
+	// 	saldo: data.saldo as string,
+	// 	aniversario: data.aniversario as string,
 	// });
 
 	const store = useStore<Dados>({
@@ -53,8 +54,8 @@ export default component$(() => {
 		cep: undefined,
 		email: undefined,
 		telefone: undefined,
-		valor: data.valor as string,
-		parcelas: data.parcelas as string,
+		saldo: data.saldo as string,
+		aniversario: data.aniversario as string,
 	});
 
 	const enviando = useStore({ is: false });
@@ -109,8 +110,8 @@ export default component$(() => {
 			CEP+=+${store.cep}%0A
 			Email+=+${store.email}%0A
 			Telefone+=+${store.telefone}%0A
-			Valor+=+${store.valor}%0A
-			Parcelas+=+${store.parcelas}`;
+			Saldo+=+${store.saldo}%0A
+			Aniversario+=+${store.aniversario}`;
 
 		document.location = whatsapp.concat(`&text=${message}`);
 
@@ -138,11 +139,11 @@ export default component$(() => {
 
 	return (
 		<>
-			<div class="max-w-5xl mx-auto p-4 md:p-8">
+			<div class="max-w-5xl mx-auto px-4 py-8 md:p-8">
 				<div class="font-extrabold mb-2 tracking-tighter text-4xl md:text-7xl text-white">
 					Estamos quase lá!
 				</div>
-				<div class="text-sefi-5 text-xl font-medium leading-none max-w-[280px]">
+				<div class="text-sefi-2 text-xl font-medium leading-none max-w-[280px]">
 					Só precisamos de poucos dados para continuarmos andamento ao
 					processo.
 				</div>
@@ -239,12 +240,12 @@ export default component$(() => {
 							<div class="input-label">Valor</div>
 							<input
 								class="input-field"
-								name="valor"
+								name="saldo"
 								placeholder="Valor"
 								required={true}
-								value={store.valor}
+								value={store.saldo}
 								onChange$={(event) =>
-									(store.valor = event.target.value)
+									(store.saldo = event.target.value)
 								}
 							/>
 						</label>
@@ -252,13 +253,13 @@ export default component$(() => {
 							<div class="input-label">Parcelas</div>
 							<input
 								class="input-field"
-								name="parcelas"
+								name="aniversario"
 								placeholder="Parcelas"
 								required={true}
-								type="number"
-								value={store.parcelas}
+								type="date"
+								value={store.aniversario}
 								onChange$={(event) =>
-									(store.parcelas = event.target.value)
+									(store.aniversario = event.target.value)
 								}
 							/>
 						</label>
