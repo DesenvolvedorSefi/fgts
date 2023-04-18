@@ -1,5 +1,4 @@
 import { component$ } from "@builder.io/qwik";
-import { SEFI } from "./logo-sefi";
 
 export default component$(() => (
 	<div class="max-w-5xl text-center md:text-left mx-auto md:grid grid-cols-2 p-8 gap-8 items-center md:py-20">
@@ -15,9 +14,19 @@ export default component$(() => (
 				atendimento está disponível para esclarecimento de dúvidas sobre
 				quaisquer dos valores apresentados.
 			</div>
+			<div class="text-sefi-1 mt-4">
+				Acesse o nosso site:{" "}
+				<a
+					href="https://seficredito.com.br"
+					target="_blank"
+					class="font-bold underline text-white"
+				>
+					seficredito.com.br
+				</a>
+			</div>
 		</div>
 		<div class="hidden md:block">
-			<SEFI className="h-40 text-white" />
+			<img src="/equipe.jpg" alt="Equipe SEFI" class="rounded-xl" />
 		</div>
 	</div>
 ));

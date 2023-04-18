@@ -37,17 +37,44 @@ export default component$(() => {
 		const Store = track(store);
 		if (Store.aniversario !== "" && Store.saldo !== "") {
 			const aniversario = dayjs(store.aniversario);
-			const hoje = dayjs();
-			const diferenca = aniversario.diff(hoje, "day"); // diferença das datas em dias
-			const taxa = 0.39 / 100;
-			let saldo = ((Number(Store.saldo) * taxa) / 30) * diferenca;
-			saldo = Number(Store.saldo) - saldo;
+			if (aniversario.isValid()) {
+				const hoje = dayjs();
+				let saque = 0;
+				let retirada = 0;
+				let saldoAtual = parseFloat(Store.saldo);
+				let index = 0;
 
-			const REAL = Intl.NumberFormat("pt-BR", {
-				style: "currency",
-				currency: "BRL",
-			});
-			store.resgate = REAL.format(saldo);
+				while (index < 10) {
+					if (saldoAtual > 20000) {
+						retirada = saldoAtual * 0.05 + 2900;
+					} else if (saldoAtual > 15000) {
+						retirada = saldoAtual * 0.1 + 1900;
+					} else if (saldoAtual > 10000) {
+						retirada = saldoAtual * 0.15 + 1150;
+					} else if (saldoAtual > 5000) {
+						retirada = saldoAtual * 0.02 + 650;
+					} else if (saldoAtual > 1000) {
+						retirada = saldoAtual * 0.03 + 150;
+					} else if (saldoAtual > 500) {
+						retirada = saldoAtual * 0.04 + 50;
+					} else {
+						retirada = saldoAtual * 0.5;
+					}
+					saldoAtual -= retirada;
+					index++;
+
+					saque +=
+						retirada /
+						(1 + Math.abs(hoje.diff(aniversario, "day"))) **
+							(0.07 / 100);
+					console.log({ retirada, saldoAtual, saque });
+				}
+				const REAL = Intl.NumberFormat("pt-BR", {
+					style: "currency",
+					currency: "BRL",
+				});
+				store.resgate = REAL.format(saque);
+			}
 		}
 	});
 
