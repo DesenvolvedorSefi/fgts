@@ -34,7 +34,7 @@ type Dados = {
 
 export default component$(() => {
 	const data = useData().value;
-	const { whatsapp } = 558002222015;
+	const { whatsapp } = useContext(AppContext);
 
 	// const store = useStore<Dados>({
 	// 	nome: "Anderson Sousa",
