@@ -12,9 +12,9 @@ export default component$(() => {
 					/>
 					<p class="text-xs">
 						CNPJ - 31.852.178/0001-94 <br />
-						Rua Menino de Deus, 760
+						Rua Tabelião Idelfonso Cavalcante, 569
 						<br />
-						Sala 303, Centro - Sobral/Ceará
+						Centro - Sobral/Ceará
 					</p>
 				</div>
 				<div class="leading-tight w-full text-center sm:text-right">
