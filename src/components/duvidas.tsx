@@ -16,7 +16,7 @@ export default component$(() => {
 				<div class="text-center mt-6">
 					<a
 						class="bg-green text-white drop-shadow-md inline-flex gap-4 px-6 py-2 items-center font-extrabold text-2xl rounded-xl ring-black/5 ring-1 shadow-xl shadow-sefi-4/25"
-						href={`${558002222015}&text=Preciso%20de%20ajuda%20para%20fazer%20o%20meu%20empr%C3%A9stimo.&type=phone_number&app_absent=0`}
+						href={`${context.whatsapp}&text=Preciso%20de%20ajuda%20para%20fazer%20o%20meu%20empr%C3%A9stimo.&type=phone_number&app_absent=0`}
 						target="_blank"
 					>
 						<span>Zap da SEFI</span>
