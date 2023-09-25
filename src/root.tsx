@@ -16,7 +16,7 @@ export const AppContext = createContextId<{ whatsapp: string }>("app");
 
 export default component$(() => {
 	useContextProvider(AppContext, {
-		whatsapp: "https://api.whatsapp.com/send/?phone=558540425410",
+		whatsapp: "https://api.whatsapp.com/send/?phone=5588935002090",
 	});
 
 	return (
